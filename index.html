@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Notes App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+
+    <section class="hero">
+        <nav>
+            <div class="brand">
+                <img src="assets/logo.png" width="40px">
+                <h1>QuickNotes</h1>
+            </div>
+            <button class="add-btn">+</button>
+            <button id="theme-toggle" class="theme-btn">
+                🌙 Dark Mode
+            </button>
+        </nav>
+
+
+        <section class="content">
+            <div class="notes-container">
+                <div class="notes-card">
+                    <div class="notes-top">
+                        <h2>Sample Notes</h2>
+                        <button class="edit-btn">✏️ Edit</button>
+                        <button class="delete-btn"></button>
+                    </div>
+
+                    <h4 class="notes-date">Date: 06/06/2026</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero fugiat ipsam aliquam repellendus
+                        asperiores laboriosam perferendis aspernatur nam adipisci quos!</p>
+                </div>
+            </div>
+        </section>
+
+
+        <dialog class="note-form" id="note-form">
+            <div class="note-form-content">
+                <input id="titleId" type="text" placeholder="Enter note title">
+                <textarea id="notesId" placeholder="Write your notes"></textarea>
+                <div class="CTA-form">
+                    <button type="button" class="save-btn">Save</button>
+                    <button type="button" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </dialog>
+    </section>
+
+
+    <footer>
+        @Codesmasher 2026 made with HTML, CSS and Vanilla JS
+    </footer>
+</body>
+
+</html>
