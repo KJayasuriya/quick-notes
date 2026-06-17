@@ -42,7 +42,7 @@ function renderNotes() {
             <button class="edit-btn">✏️ Edit</button>
             <button class="delete-btn"></button>
         </div>
-        <h4 class = "notes-date">Last Edited: ${note.date}</h4>
+        <h4 class = "notes-date">Saved DateTime: ${note.date}</h4>
         <p>${note.content}</p>
         `;
 

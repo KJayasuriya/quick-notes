@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --text-color-normal: #111;
+    --fast-transition: 0.3s;
+    --text-primary: #222;
+    --text-secondary: #555;
+    --bg-content: #fff;
+    --light-shadow: 0 8px 20px rgba(0, 0, 0, .20);
+    --bold-shadow: 0 8px 20px rgba(0, 0, 0, .5);
+    --button-gradient: linear-gradient(45deg, #ff6565, rgb(80, 80, 255));
+    --box-shadow-dark: 0 10px 15px rgba(255, 84, 84, .4);
+    --bg-card: #242424;
+    --text-primary-dark: #ffffff;
+    --text-secondary-dark: #d0d0d0;
+    --border-dark-mode: rgba(255, 255, 255, 0.06);
+    --footer-bg: #0d0d0d;
+    --footer-color: #888;
+    --slow-transition: .8s;
+    --input-box-color:
+}
+
+.hero {
+    background-attachment: fixed;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url("../assets/login-background-light.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10rem;
+}
+
+.dark-mode .hero {
+    background-attachment: fixed;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url("../assets/login-background.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.theme-btn {
+    font-size: 18px;
+    border: none;
+    width: 160px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 10px;
+    box-shadow: var(--light-shadow);
+    cursor: pointer;
+    transition: var(--fast-transition);
+}
+
+.dark-mode .theme-btn {
+    background-color: var(--bg-card);
+    color: var(--text-primary-dark);
+    box-shadow: var(--box-shadow-dark);
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+}
+
+.dark-mode .sign-up-box h1 {
+    color: var(--text-primary-dark);
+}
+
+.sign-up-box h3 {
+    color: rgb(0, 102, 255);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.dark-mode .sign-up-box h3 {
+    color: rgb(0, 102, 255);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.sign-up-box {
+    background: transparent;
+    box-shadow: var(--bold-shadow);
+    backdrop-filter: blur(250px);
+    border-radius: 20px;
+    padding: 30px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.dark-mode .sign-up-box {
+    background: transparent;
+    backdrop-filter: blur(250px);
+    border-radius: 20px;
+    padding: 30px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.sign-up-box input {
+    border: .5px solid #fff;
+    color: var(--text-primary-dark);
+    background-color: var(--bg-card);
+    padding: 10px;
+    width: 400px;
+    border-radius: 10px;
+}
+
+.sign-up-box input {
+    border: .5px solid #4b4b4b;
+    color: var(--text-color-normal);
+    background-color: #fff;
+    padding: 10px;
+    width: 400px;
+    border-radius: 10px;
+}
+
+.dark-mode .sign-up-box input {
+    border: .5px solid #fff;
+    color: var(--text-primary-dark);
+    background-color: var(--bg-card);
+    padding: 10px;
+    width: 400px;
+    border-radius: 10px;
+}
+
+.sign-up-btn,
+.dark-mode .sign-up-btn {
+    border: none;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 14px;
+    font-weight: bold;
+    width: 400px;
+    background: linear-gradient(to right, rgb(218, 130, 238), rgb(0, 225, 255));
+    transition: var(--fast-transition);
+}
+
+.sign-up-section {
+    display: flex;
+    gap: 5px;
+}
+
+.dark-mode .sign-up-section {
+    display: flex;
+    gap: 5px;
+}
+
+.dark-mode .sign-up-section p {
+    color: var(--text-secondary-dark);
+}
+
+.sign-up-section a {
+    text-decoration: blue;
+}
+
+.dark-mode .sign-up-section a {
+    text-decoration: none;
+    color: aqua;
+}
+
+.sign-up-btn:hover {
+    transform: translateY(-10px);
+}
