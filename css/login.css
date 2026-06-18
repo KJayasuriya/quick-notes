@@ -22,7 +22,6 @@
     --footer-bg: #0d0d0d;
     --footer-color: #888;
     --slow-transition: .8s;
-    --input-box-color:
 }
 
 .hero {
@@ -151,6 +150,7 @@
     width: 400px;
     background: linear-gradient(to right, rgb(218, 130, 238), rgb(0, 225, 255));
     transition: var(--fast-transition);
+    cursor: pointer;
 }
 
 .sign-up-section {

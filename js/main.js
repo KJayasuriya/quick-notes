@@ -1,118 +1,234 @@
-// Theme Toggle
-const themeButton = document.querySelector("#theme-toggle");
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-    themeButton.textContent = "☀️ Light Mode";
-}
-themeButton.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("theme", "dark");
-        themeButton.textContent = "☀️ Light Mode";
-    }
-    else {
-        localStorage.setItem("theme", "light");
-        themeButton.textContent = "🌙 Dark Mode";
-    }
-});
-// Elements
+
+// ==========================
+// DOM ELEMENTS
+// ==========================
+
 let editIndex = null;
-const noOfNotes = 0;
+
 const noteForm = document.getElementById("note-form");
 const addButton = document.querySelector(".add-btn");
 const saveButton = document.querySelector(".save-btn");
 const cancelButton = document.querySelector(".cancel-btn");
 const notesContainer = document.querySelector(".notes-container");
+
 const titleInput = document.getElementById("titleId");
 const notesInput = document.getElementById("notesId");
-//Empty notes situation
 
-/* Object to store the notes */
-const notes = JSON.parse(localStorage.getItem("notes")) || [];
+// ==========================
+// AUTH CHECK
+// ==========================
 
-/* Rendering the notes from stored object to webpage */
+const currentUser = localStorage.getItem("currentUser");
+
+if (!currentUser) {
+    window.location.href = "index.html";
+}
+
+// ==========================
+// THEME TOGGLE
+// ==========================
+
+const themeButton = document.querySelector("#theme-toggle");
+
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+    themeButton.textContent = "☀️ Light Mode";
+}
+
+themeButton.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+        themeButton.textContent = "☀️ Light Mode";
+    }
+
+    else {
+        localStorage.setItem("theme", "light");
+        themeButton.textContent = "🌙 Dark Mode";
+    }
+});
+
+// ==========================
+// NOTES DATABASE
+// ==========================
+
+let notesDB = JSON.parse(localStorage.getItem("notesDB")) || {};
+
+// Create user notes array if not existing
+
+if (!notesDB[currentUser]) {
+    notesDB[currentUser] = [];
+}
+
+// ==========================
+// SAVE DATABASE
+// ==========================
+
+function saveDatabase() {
+    localStorage.setItem("notesDB", JSON.stringify(notesDB));
+}
+
+// ==========================
+// RENDER NOTES
+// ==========================
+
 function renderNotes() {
+
     notesContainer.innerHTML = "";
-    notes.forEach((note, index) => {
+
+    const userNotes = notesDB[currentUser];
+
+    userNotes.forEach((note, index) => {
+
         const noteCard = document.createElement("div");
+
         noteCard.classList.add("notes-card");
+
         noteCard.innerHTML = `
-        <div class="notes-top">
-            <h2>${note.title}</h2>
-            <button class="edit-btn">✏️ Edit</button>
-            <button class="delete-btn"></button>
-        </div>
-        <h4 class = "notes-date">Last Edited: ${note.date}</h4>
-        <p>${note.content}</p>
+            <div class="notes-top">
+
+                <h2>${note.title}</h2>
+
+                <div>
+
+                    <button class="edit-btn">
+                        ✏️ Edit
+                    </button>
+
+                    <button class="delete-btn"></button>
+
+                </div>
+
+            </div>
+
+            <h4 class="notes-date">
+                Last Edited: ${note.date}
+            </h4>
+
+            <p>${note.content}</p>
         `;
 
+        // ==========================
+        // DELETE NOTE
+        // ==========================
 
-        /* DELETE */
-        noteCard.querySelector(".delete-btn").addEventListener("click", () => {
-            notes.splice(index, 1);
-            saveNotes();
+        const deleteBtn = noteCard.querySelector(".delete-btn");
+
+        deleteBtn.addEventListener("click", () => {
+
+            notesDB[currentUser].splice(index, 1);
+
+            saveDatabase();
+
             renderNotes();
         });
 
-        /* EDIT */
-        noteCard.querySelector(".edit-btn").addEventListener("click", () => {
+        // ==========================
+        // EDIT NOTE
+        // ==========================
+
+        const editBtn = noteCard.querySelector(".edit-btn");
+
+        editBtn.addEventListener("click", () => {
+
             editIndex = index;
+
             titleInput.value = note.title;
+
             notesInput.value = note.content;
-            noteForm.showModel();
+
+            noteForm.showModal();
         });
+
         notesContainer.appendChild(noteCard);
     });
 }
 
-function saveNotes() {
-    localStorage.setItem("notes", JSON.stringify(notes));
-}
-// Open dialog
+// ==========================
+// OPEN DIALOG
+// ==========================
+
 addButton.addEventListener("click", () => {
+
+    editIndex = null;
+
+    titleInput.value = "";
+
+    notesInput.value = "";
+
     noteForm.showModal();
 });
-// Close dialog
+
+// ==========================
+// CLOSE DIALOG
+// ==========================
+
 cancelButton.addEventListener("click", () => {
     noteForm.close();
 });
-// Save note
+
+// ==========================
+// SAVE NOTE
+// ==========================
+
 saveButton.addEventListener("click", () => {
 
     const title = titleInput.value.trim();
+
     const content = notesInput.value.trim();
 
     if (!title || !content) {
+
         alert("Please enter notes!");
+
         return;
     }
 
     const noteData = {
-        title,
-        content,
+
+        title: title,
+
+        content: content,
+
         date: new Date().toLocaleString()
     };
 
-    /* EDIT EXISTING NOTE */
+    // ==========================
+    // EDIT EXISTING NOTE
+    // ==========================
+
     if (editIndex !== null) {
 
-        notes[editIndex] = noteData;
+        notesDB[currentUser][editIndex] = noteData;
 
         editIndex = null;
     }
 
-    /* CREATE NEW NOTE */
+    // ==========================
+    // CREATE NEW NOTE
+    // ==========================
+
     else {
-        notes.push(noteData);
+
+        notesDB[currentUser].push(noteData);
     }
 
-    saveNotes();
+    saveDatabase();
 
     renderNotes();
 
     titleInput.value = "";
+
     notesInput.value = "";
 
     noteForm.close();
 });
+
+// ==========================
+// INITIAL RENDER
+// ==========================
+
 renderNotes();
+
