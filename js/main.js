@@ -10,7 +10,7 @@ const addButton = document.querySelector(".add-btn");
 const saveButton = document.querySelector(".save-btn");
 const cancelButton = document.querySelector(".cancel-btn");
 const notesContainer = document.querySelector(".notes-container");
-
+const emptyDialog = document.getElementById("empty-notes");
 const titleInput = document.getElementById("titleId");
 const notesInput = document.getElementById("notesId");
 
@@ -23,7 +23,8 @@ const currentUser = localStorage.getItem("currentUser");
 if (!currentUser) {
     window.location.href = "index.html";
 }
-
+const greeting = document.getElementById("greeting");
+greeting.innerText = `Hi, ${currentUser} 👋...`;
 // ==========================
 // THEME TOGGLE
 // ==========================
@@ -31,19 +32,14 @@ if (!currentUser) {
 const themeButton = document.querySelector("#theme-toggle");
 
 if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-    themeButton.textContent = "☀️ Light Mode";
+    document.body.classList.add("dark-mode"); themeButton.textContent = "☀️ Light Mode";
 }
 
 themeButton.addEventListener("click", () => {
-
     document.body.classList.toggle("dark-mode");
-
     if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("theme", "dark");
-        themeButton.textContent = "☀️ Light Mode";
+        localStorage.setItem("theme", "dark"); themeButton.textContent = "☀️ Light Mode";
     }
-
     else {
         localStorage.setItem("theme", "light");
         themeButton.textContent = "🌙 Dark Mode";
@@ -75,73 +71,41 @@ function saveDatabase() {
 // ==========================
 
 function renderNotes() {
-
     notesContainer.innerHTML = "";
-
     const userNotes = notesDB[currentUser];
-
+    if (!userNotes.length) {
+        emptyDialog.style.display = "block";
+        return;
+    }
+    emptyDialog.style.display = "none";
     userNotes.forEach((note, index) => {
-
         const noteCard = document.createElement("div");
-
         noteCard.classList.add("notes-card");
-
-        noteCard.innerHTML = `
-            <div class="notes-top">
-
-                <h2>${note.title}</h2>
-
-                <div>
-
-                    <button class="edit-btn">
-                        ✏️ Edit
-                    </button>
-
-                    <button class="delete-btn"></button>
-
-                </div>
-
+        noteCard.innerHTML = `        
+        <div class="notes-top">
+            <h2>${note.title}</h2>
+            <div>
+                <button class="edit-btn">✏️ Edit</button>
+                <button class="delete-btn"></button>
             </div>
-
-            <h4 class="notes-date">
-                Last Edited: ${note.date}
-            </h4>
-
-            <p>${note.content}</p>
-        `;
-
-        // ==========================
-        // DELETE NOTE
-        // ==========================
-
+        </div>
+        <h4 class="notes-date">Last Edited: ${note.date}</h4>
+        <p>${note.content}</p>    `;
+        // ==========================    // DELETE NOTE    // ==========================
         const deleteBtn = noteCard.querySelector(".delete-btn");
-
         deleteBtn.addEventListener("click", () => {
-
             notesDB[currentUser].splice(index, 1);
-
             saveDatabase();
-
             renderNotes();
         });
-
-        // ==========================
-        // EDIT NOTE
-        // ==========================
-
+        // ==========================    // EDIT NOTE    // ==========================
         const editBtn = noteCard.querySelector(".edit-btn");
-
         editBtn.addEventListener("click", () => {
-
             editIndex = index;
-
             titleInput.value = note.title;
-
             notesInput.value = note.content;
-
             noteForm.showModal();
         });
-
         notesContainer.appendChild(noteCard);
     });
 }
@@ -151,16 +115,18 @@ function renderNotes() {
 // ==========================
 
 addButton.addEventListener("click", () => {
-
     editIndex = null;
-
     titleInput.value = "";
-
     notesInput.value = "";
-
     noteForm.showModal();
 });
-
+const createButton = document.querySelector(".first-create-btn");
+createButton.addEventListener("click", () => {
+    editIndex = null;
+    titleInput.value = "";
+    notesInput.value = "";
+    noteForm.showModal();
+})
 // ==========================
 // CLOSE DIALOG
 // ==========================
@@ -174,55 +140,30 @@ cancelButton.addEventListener("click", () => {
 // ==========================
 
 saveButton.addEventListener("click", () => {
-
     const title = titleInput.value.trim();
-
     const content = notesInput.value.trim();
-
     if (!title || !content) {
-
         alert("Please enter notes!");
-
         return;
     }
-
     const noteData = {
-
         title: title,
-
         content: content,
-
         date: new Date().toLocaleString()
     };
-
-    // ==========================
-    // EDIT EXISTING NOTE
-    // ==========================
-
+    // ==========================// EDIT EXISTING NOTE// ==========================
     if (editIndex !== null) {
-
         notesDB[currentUser][editIndex] = noteData;
-
         editIndex = null;
     }
-
-    // ==========================
-    // CREATE NEW NOTE
-    // ==========================
-
+    // ==========================// CREATE NEW NOTE// ==========================
     else {
-
         notesDB[currentUser].push(noteData);
     }
-
     saveDatabase();
-
     renderNotes();
-
     titleInput.value = "";
-
     notesInput.value = "";
-
     noteForm.close();
 });
 

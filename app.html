@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Notes App</title>
+    <link rel="icon" src="assets/logo.png">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js" defer></script>
 </head>
@@ -15,7 +16,7 @@
     <section class="hero">
         <nav>
             <div class="brand">
-                <img src="assets/logo.png" width="40px">
+                <img src="assets/logo.png" width="70px">
                 <h1>NotesNest</h1>
             </div>
             <button class="add-btn">+</button>
@@ -24,10 +25,20 @@
             </button>
             <a id="log-out-btn" href="index.html">Log out</a>
         </nav>
+        <h1 id="greeting"></h1>
+        <div id="empty-notes">
 
+            <h2>📚 Your nest is empty</h2>
+
+            <p>Start collecting your study notes.
+                Organize lectures, formulas, ideas, and reminders in one place.</p>
+
+            <button class="first-create-btn">+ Create First Note</button>
+        </div>
 
         <section class="content">
-            <div class="notes-container"></div>
+            <div class="notes-container">
+            </div>
         </section>
 
 

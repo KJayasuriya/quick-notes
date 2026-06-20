@@ -179,3 +179,17 @@
 .sign-up-btn:hover {
     transform: translateY(-10px);
 }
+
+@media (max-width: 750px) {
+    .sign-up-box {
+        max-width: 300px;
+    }
+
+    .sign-up-box input {
+        max-width: 250px;
+    }
+
+    .sign-up-btn {
+        max-width: 250px;
+    }
+}

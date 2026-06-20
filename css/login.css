@@ -179,3 +179,17 @@
 .login-btn:hover {
     transform: translateY(-10px);
 }
+
+@media (max-width: 750px) {
+    .login-box {
+        max-width: 300px;
+    }
+
+    .login-box input {
+        max-width: 250px;
+    }
+
+    .login-btn {
+        max-width: 250px;
+    }
+}

@@ -7,7 +7,7 @@
     --light-shadow: 0 8px 20px rgba(0, 0, 0, .20);
     --bold-shadow: 0 8px 20px rgba(0, 0, 0, .5);
     --button-gradient: linear-gradient(45deg, #ff6565, rgb(80, 80, 255));
-    --box-shadow-dark: 0 10px 15px rgba(255, 84, 84, .4);
+    --box-shadow-dark: 0 6px 15px rgba(255, 84, 84, .4);
     --bg-card: #242424;
     --text-primary-dark: #ffffff;
     --text-secondary-dark: #d0d0d0;
@@ -132,6 +132,16 @@ nav ul li a:hover {
     transform: scale(1.1);
 }
 
+#greeting {
+    margin-left: 10%;
+    margin-top: 5%;
+    color: var(--text-secondary);
+}
+
+.dark-mode #greeting {
+    color: var(--text-secondary-dark);
+}
+
 /* Notes card */
 .content {
     padding: 100px 10%;
@@ -144,11 +154,60 @@ nav ul li a:hover {
     flex-direction: row;
 }
 
-.notes-card {
+#empty-notes {
     background: var(--bg-content);
     padding: 30px;
+    margin: 10% auto;
     min-width: 300px;
     max-width: 420px;
+    min-height: 180px;
+    box-shadow: var(--light-shadow);
+    border-radius: 20px;
+    transition: var(--fast-transition);
+}
+
+.dark-mode #empty-notes {
+    background: var(--bg-card);
+    box-shadow: var(--box-shadow-dark);
+    transition: var(--fast-transition);
+}
+
+#empty-notes h2 {
+    color: var(--text-primary);
+}
+
+.dark-mode #empty-notes h2 {
+    color: var(--text-primary-dark);
+}
+
+#empty-notes p {
+    color: var(--text-secondary);
+}
+
+.dark-mode #empty-notes p {
+    color: var(--text-secondary-dark);
+}
+
+.first-create-btn {
+    border: var(--border-light);
+    cursor: pointer;
+    background: var(--button-gradient);
+    box-shadow: var(--light-shadow);
+    font-weight: bolder;
+    margin-top: 10px;
+    padding: 9px 18px;
+    border-radius: 20px;
+    transition: .5s;
+}
+
+.first-create-btn:hover {
+    transform: scale(1.1);
+}
+
+.notes-card {
+    background: var(--bg-content);
+    padding: 20px;
+    width: 420px;
     min-height: 180px;
     box-shadow: var(--light-shadow);
     border-radius: 20px;
@@ -182,6 +241,7 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
     gap: 10px;
 }
 
@@ -217,7 +277,7 @@ nav ul li a:hover {
     border: none;
     background: none;
     font-size: 17px;
-    padding: 4px 4%;
+    padding: 4px 8%;
     box-shadow: var(--light-shadow);
     border-radius: 20px;
     transition: var(--fast-transition);
@@ -358,6 +418,7 @@ footer {
 @media (max-width: 750px) {
     nav {
         flex-direction: column;
+        gap: 10px;
     }
 
     .brand h1 {
@@ -377,5 +438,20 @@ footer {
 
     .notes-container {
         flex-direction: column;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+
+    .notes-card {
+        max-width: 300px;
+    }
+
+    #empty-notes {
+        margin-left: 5%;
+        max-width: 300px;
+    }
+
+    .note-form-content {
+        max-width: 300px;
     }
 }
