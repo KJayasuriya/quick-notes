@@ -14,9 +14,10 @@
 
 
     <section class="hero">
+        <!--navbar -->
         <nav>
             <div class="brand">
-                <img src="assets/logo.png" width="70px">
+                <img src="assets/logo.png" width="50px">
                 <h1>NotesNest</h1>
             </div>
             <button class="add-btn">+</button>
@@ -25,7 +26,10 @@
             </button>
             <a id="log-out-btn" href="index.html">Log out</a>
         </nav>
+
         <h1 id="greeting"></h1>
+
+        <!-- Dialog message when there is no notes-->
         <div id="empty-notes">
 
             <h2>📚 Your nest is empty</h2>
@@ -36,12 +40,23 @@
             <button class="first-create-btn">+ Create First Note</button>
         </div>
 
+        <!-- Notes container -->
         <section class="content">
             <div class="notes-container">
             </div>
         </section>
 
+        <!--Preloader animation-->
+        <div id="preloader">
+            <div class="loader">
+                <div class="circle"></div>
+                <div class="pencil">✏️</div>
+                <h3> Loading..</h3>
+            </div>
+        </div>
 
+
+        <!-- Form to create notes-->
         <dialog class="note-form" id="note-form">
             <div class="note-form-content">
                 <input id="titleId" type="text" placeholder="Enter note title">
@@ -52,8 +67,8 @@
                 </div>
             </div>
         </dialog>
-    </section>
 
+    </section>
 
     <footer>
         @Codesmasher 2026 made with HTML, CSS and Vanilla JS
