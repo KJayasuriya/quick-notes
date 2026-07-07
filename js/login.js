@@ -42,14 +42,17 @@ if (signupBtn) {
 
         const password =
             document.getElementById("pwdId").value.trim();
-
-        if (!username || !password) {
-
+        const confirmation = document.getElementById("confirm-pwd").value.trim();
+        if (!username || !password || !confirmation) {
             alert("Please fill all fields!");
-
             return;
         }
+        if (confirmation != password) {
+            document.getElementById("confirm-pwd").value = "";
 
+            alert("Password doesn't match!");
+            return;
+        }
         let users =
             JSON.parse(localStorage.getItem("users")) || [];
 

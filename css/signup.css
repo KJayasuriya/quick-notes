@@ -71,9 +71,6 @@
     transform: scale(1.1);
 }
 
-.dark-mode .sign-up-box h1 {
-    color: var(--text-primary-dark);
-}
 
 .sign-up-box h3 {
     color: rgb(0, 102, 255);

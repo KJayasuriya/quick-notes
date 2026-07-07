@@ -84,13 +84,12 @@ function renderNotes() {
         noteCard.innerHTML = `        
         <div class="notes-top">
             <h2>${note.title}</h2>
-            <div>
-                <button class="edit-btn">✏️ Edit</button>
-                <button class="delete-btn"></button>
-            </div>
+            <button class="edit-btn">✏️ Edit</button>
+            <button class="delete-btn"></button>
         </div>
-        <h4 class="notes-date">Last Edited: ${note.date}</h4>
-        <p>${note.content}</p>    `;
+        <pre>${note.content}</pre>  
+        <hr>  
+        <h4 class="notes-date">Last Edited: ${note.date}</h4>`;
         // ==========================    // DELETE NOTE    // ==========================
         const deleteBtn = noteCard.querySelector(".delete-btn");
         deleteBtn.addEventListener("click", () => {
