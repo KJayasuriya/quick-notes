@@ -179,33 +179,6 @@ saveButton.addEventListener("click", () => {
 const searchInput = document.getElementById("search-input");
 const searchForm = document.querySelector("form");
 
-searchForm.addEventListener("submit", (event) => {
-
-    event.preventDefault();
-
-    const query = searchInput.value.trim().toLowerCase();
-
-    // Empty search -> show all notes
-    if (query === "") {
-        renderNotes();
-        return;
-    }
-
-    const filteredNotes = notesDB[currentUser].filter(note =>
-
-        note.title.toLowerCase().includes(query) ||
-
-        note.content.toLowerCase().includes(query)
-
-    );
-
-    renderNotes(filteredNotes);
-
-    if (filteredNotes.length === 0) {
-        alert("No matching notes found!");
-    }
-
-});
 searchInput.addEventListener("input", () => {
 
     const query = searchInput.value.trim().toLowerCase();
@@ -223,7 +196,14 @@ searchInput.addEventListener("input", () => {
 
     );
 
-    renderNotes(filteredNotes);
+    if (filteredNotes.length === 0) {
+        alert("No matching notes found!");
+        renderNotes();
+        return;
+    }
+    else {
+        renderNotes(filteredNotes);
+    }
 
 });
 // INITIAL RENDER

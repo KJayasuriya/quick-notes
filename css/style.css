@@ -37,7 +37,7 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 0;
 }
 
@@ -53,11 +53,18 @@ nav {
     justify-content: space-between;
     padding: 20px 40px;
     gap: 20vw;
+    margin: auto;
 }
 
-nav img {
-    height: 60px;
-    width: auto;
+.brand {
+    background-image: url("../assets/logo-light.png");
+    background-size: cover;
+    width: 150px;
+    aspect-ratio: 3/1;
+}
+
+.dark-mode .brand {
+    background-image: url("../assets/logo.png");
 }
 
 nav ul {
@@ -119,6 +126,7 @@ search {
 }
 
 search input {
+    width: inherit;
     background-color: transparent;
     border: none;
     color: var(--text-secondary);
@@ -131,6 +139,7 @@ button[type="reset"] {
     color: inherit;
     cursor: pointer;
 }
+
 
 .search-btn {
     background: linear-gradient(45deg, purple, aqua);
@@ -219,9 +228,8 @@ search:active {
 }
 
 .notes-container {
-    margin-top: 0;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 30px;
     /* padding: 20px; */
 }
@@ -277,10 +285,12 @@ search:active {
 }
 
 .notes-card {
+    width: 100%;
     background: var(--bg-content);
     padding: 20px;
-    min-width: 340px;
-    min-height: 180px;
+    max-width: 340px;
+
+    /* min-height: 180px; */
     box-shadow: var(--light-shadow);
     border-radius: 20px;
     transition: var(--fast-transition);
@@ -492,20 +502,32 @@ footer {
 
 /* Responsive layout */
 @media (max-width: 750px) {
-    nav {
-        justify-content: space-between;
-        flex-wrap: wrap;
-        align-items: center;
-        width: auto;
-        gap: unset;
+    body {
+        width: 100vw;
     }
 
-    nav img {
+    .add-btn {
+        right: 20vw;
+    }
+
+    nav {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100vw;
+        gap: unset;
+        padding: 10px;
+        margin-left: 25px;
+    }
+
+    .brand {
         width: auto;
         height: 35px;
     }
 
+
     form {
+        margin: 50px;
         justify-content: center;
         gap: 50px;
     }
@@ -530,7 +552,7 @@ footer {
     }
 
     .notes-card {
-        max-width: fit-content;
+        width: fit-content;
     }
 
     #empty-notes {
@@ -550,7 +572,6 @@ footer {
         max-width: 100vw;
     }
 }
-
 
 /* preloader animation*/
 /* Full screen overlay */
