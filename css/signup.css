@@ -109,16 +109,6 @@
     gap: 10px;
 }
 
-
-.sign-up-box input {
-    border: .5px solid #fff;
-    color: var(--text-primary-dark);
-    background-color: var(--bg-card);
-    padding: 10px;
-    width: 400px;
-    border-radius: 10px;
-}
-
 .sign-up-box input {
     border: .5px solid #4b4b4b;
     color: var(--text-color-normal);

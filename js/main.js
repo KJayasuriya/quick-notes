@@ -1,7 +1,7 @@
 
-// ==========================
+
 // DOM ELEMENTS
-// ==========================
+
 
 let editIndex = null;
 
@@ -14,9 +14,10 @@ const emptyDialog = document.getElementById("empty-notes");
 const titleInput = document.getElementById("titleId");
 const notesInput = document.getElementById("notesId");
 
-// ==========================
+const searchBar = document.querySelector("form");
+
 // AUTH CHECK
-// ==========================
+
 
 const currentUser = localStorage.getItem("currentUser");
 
@@ -25,9 +26,9 @@ if (!currentUser) {
 }
 const greeting = document.getElementById("greeting");
 greeting.innerText = `Hi, ${currentUser} 👋...`;
-// ==========================
+
 // THEME TOGGLE
-// ==========================
+
 
 const themeButton = document.querySelector("#theme-toggle");
 
@@ -46,9 +47,9 @@ themeButton.addEventListener("click", () => {
     }
 });
 
-// ==========================
+
 // NOTES DATABASE
-// ==========================
+
 
 let notesDB = JSON.parse(localStorage.getItem("notesDB")) || {};
 
@@ -58,27 +59,33 @@ if (!notesDB[currentUser]) {
     notesDB[currentUser] = [];
 }
 
-// ==========================
+
 // SAVE DATABASE
-// ==========================
+
 
 function saveDatabase() {
     localStorage.setItem("notesDB", JSON.stringify(notesDB));
 }
 
-// ==========================
-// RENDER NOTES
-// ==========================
 
-function renderNotes() {
+// RENDER NOTES
+
+
+function renderNotes(notesList = notesDB[currentUser]) {
+
     notesContainer.innerHTML = "";
-    const userNotes = notesDB[currentUser];
-    if (!userNotes.length) {
+
+    if (!notesList.length) {
         emptyDialog.style.display = "block";
+        addButton.style.display = "none";
+        searchBar.style.display = "none";
         return;
     }
+
     emptyDialog.style.display = "none";
-    userNotes.forEach((note, index) => {
+    addButton.style.display = "block";
+    searchBar.style.display = "flex";
+    notesList.forEach((note, index) => {
         const noteCard = document.createElement("div");
         noteCard.classList.add("notes-card");
         noteCard.innerHTML = `        
@@ -90,14 +97,14 @@ function renderNotes() {
         <pre>${note.content}</pre>  
         <hr>  
         <h4 class="notes-date">Last Edited: ${note.date}</h4>`;
-        // ==========================    // DELETE NOTE    // ==========================
+        // DELETE NOTE    
         const deleteBtn = noteCard.querySelector(".delete-btn");
         deleteBtn.addEventListener("click", () => {
             notesDB[currentUser].splice(index, 1);
             saveDatabase();
             renderNotes();
         });
-        // ==========================    // EDIT NOTE    // ==========================
+        // EDIT NOTE    
         const editBtn = noteCard.querySelector(".edit-btn");
         editBtn.addEventListener("click", () => {
             editIndex = index;
@@ -109,9 +116,9 @@ function renderNotes() {
     });
 }
 
-// ==========================
+
 // OPEN DIALOG
-// ==========================
+
 
 addButton.addEventListener("click", () => {
     editIndex = null;
@@ -126,17 +133,17 @@ createButton.addEventListener("click", () => {
     notesInput.value = "";
     noteForm.showModal();
 })
-// ==========================
+
 // CLOSE DIALOG
-// ==========================
+
 
 cancelButton.addEventListener("click", () => {
     noteForm.close();
 });
 
-// ==========================
+
 // SAVE NOTE
-// ==========================
+
 
 saveButton.addEventListener("click", () => {
     const title = titleInput.value.trim();
@@ -150,12 +157,12 @@ saveButton.addEventListener("click", () => {
         content: content,
         date: new Date().toLocaleString()
     };
-    // ==========================// EDIT EXISTING NOTE// ==========================
+    // EDIT EXISTING NOTE
     if (editIndex !== null) {
         notesDB[currentUser][editIndex] = noteData;
         editIndex = null;
     }
-    // ==========================// CREATE NEW NOTE// ==========================
+    // CREATE NEW NOTE
     else {
         notesDB[currentUser].push(noteData);
     }
@@ -166,9 +173,61 @@ saveButton.addEventListener("click", () => {
     noteForm.close();
 });
 
-// ==========================
+
+// SEARCH NOTES
+
+const searchInput = document.getElementById("search-input");
+const searchForm = document.querySelector("form");
+
+searchForm.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    const query = searchInput.value.trim().toLowerCase();
+
+    // Empty search -> show all notes
+    if (query === "") {
+        renderNotes();
+        return;
+    }
+
+    const filteredNotes = notesDB[currentUser].filter(note =>
+
+        note.title.toLowerCase().includes(query) ||
+
+        note.content.toLowerCase().includes(query)
+
+    );
+
+    renderNotes(filteredNotes);
+
+    if (filteredNotes.length === 0) {
+        alert("No matching notes found!");
+    }
+
+});
+searchInput.addEventListener("input", () => {
+
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (query === "") {
+        renderNotes();
+        return;
+    }
+
+    const filteredNotes = notesDB[currentUser].filter(note =>
+
+        note.title.toLowerCase().includes(query) ||
+
+        note.content.toLowerCase().includes(query)
+
+    );
+
+    renderNotes(filteredNotes);
+
+});
 // INITIAL RENDER
-// ==========================
+
 
 renderNotes();
 

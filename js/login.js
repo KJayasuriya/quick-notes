@@ -37,11 +37,9 @@ if (signupBtn) {
 
     signupBtn.addEventListener("click", () => {
 
-        const username =
-            document.getElementById("nameId").value.trim();
+        const username = document.getElementById("nameId").value.trim();
 
-        const password =
-            document.getElementById("pwdId").value.trim();
+        const password = document.getElementById("pwdId").value.trim();
         const confirmation = document.getElementById("confirm-pwd").value.trim();
         if (!username || !password || !confirmation) {
             alert("Please fill all fields!");
