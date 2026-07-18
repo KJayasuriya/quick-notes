@@ -1,5 +1,5 @@
 
-const API_URL = "https://notex-webapp.netlify.app/";
+const API_URL = "https://quick-notes-api.onrender.com";
 // DOM ELEMENTS
 
 
