@@ -1,4 +1,4 @@
-console.log(localStorage.getItem("users"));
+const API_URL = "https://quick-notes-api.onrender.com";
 // Theme Toggle
 const themeButton = document.querySelector("#theme-toggle");
 
@@ -52,12 +52,21 @@ if (signupBtn) {
 
         if (password !== confirmation) {
             alert("Passwords do not match.");
+            document.getElementById("pwdId").value = "";
+            document.getElementById("confirm-pwd").value = "";
             return;
         }
 
-        const response = await fetch(
-            "http://127.0.0.1:8000/register",
-            {
+        // Disable button while request is in progress
+        signupBtn.disabled = true;
+        signupBtn.textContent = "Creating Account...";
+
+        let response;
+
+        try {
+
+            response = await fetch(`${API_URL}/register`, {
+
                 method: "POST",
 
                 headers: {
@@ -68,8 +77,27 @@ if (signupBtn) {
                     username,
                     password
                 })
-            }
-        );
+
+            });
+
+        }
+        catch (error) {
+
+            alert("Unable to connect to the server.");
+            return;
+
+        }
+        finally {
+
+            signupBtn.disabled = false;
+            signupBtn.textContent = "Sign Up";
+
+        }
+
+        if (!response.ok) {
+            alert("Server error.");
+            return;
+        }
 
         const result = await response.json();
 
@@ -101,9 +129,14 @@ if (loginButton) {
         const password =
             document.getElementById("pwdId").value.trim();
 
-        const response = await fetch(
-            "http://127.0.0.1:8000/login",
-            {
+        // Disable button
+        loginButton.disabled = true;
+        loginButton.textContent = "Logging in...";
+        let response;
+
+        try {
+
+            response = await fetch(`${API_URL}/login`, {
                 method: "POST",
 
                 headers: {
@@ -114,31 +147,37 @@ if (loginButton) {
                     username,
                     password
                 })
-            }
-        );
+            });
+
+        }
+        catch (error) {
+
+            alert("Unable to connect to the server.");
+            return;
+
+        }
+        finally {
+
+            loginButton.disabled = false;
+            loginButton.textContent = "Login";
+
+        }
+
+        if (!response.ok) {
+            alert("Server error.");
+            return;
+        }
 
         const result = await response.json();
 
         if (!result.success) {
-
             alert(result.message);
-
             return;
-
         }
 
-        localStorage.setItem(
-            "token",
-            result.token
-        );
-
-        localStorage.setItem(
-            "username",
-            result.user.username
-        );
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("username", result.user.username);
 
         window.location.href = "app.html";
-
     });
-
 }
