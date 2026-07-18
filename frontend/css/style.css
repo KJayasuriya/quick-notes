@@ -227,6 +227,16 @@ search:active {
     padding: 60px;
 }
 
+.no-results {
+    text-align: center;
+    margin-top: 3rem;
+    opacity: .7;
+}
+
+.dark-mode .no-results {
+    color: var(--text-primary-dark);
+}
+
 .notes-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
