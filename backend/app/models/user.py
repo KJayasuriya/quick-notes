@@ -14,8 +14,8 @@ class UserModel:
         try:
             cursor.execute("""
                 INSERT INTO users (username, pwd_hash)
-                VALUES (:1, :2)
-            """, [username, pwd_hash])
+                VALUES (%s, %s)
+            """, (username, pwd_hash))
 
             connection.commit()
 
@@ -46,8 +46,8 @@ class UserModel:
                     pwd_hash,
                     created_at
                 FROM users
-                WHERE username = :1
-            """, [username])
+                WHERE username = %s
+            """, (username,))
 
             row = cursor.fetchone()
 
@@ -77,8 +77,8 @@ class UserModel:
                     username,
                     created_at
                 FROM users
-                WHERE id = :1
-            """, [user_id])
+                WHERE id = %s
+            """, (user_id,))
 
             row = cursor.fetchone()
 
