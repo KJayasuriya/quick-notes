@@ -22,9 +22,9 @@ class NoteModel:
                 )
                 VALUES
                 (
-                    :1,
-                    :2,
-                    :3
+                    %s,
+                    %s,
+                    %s
                 )
             """, (
                 user_id,
@@ -62,7 +62,7 @@ class NoteModel:
                     created_at,
                     updated_at
                 FROM notes
-                WHERE user_id = :1
+                WHERE user_id = %s
                 ORDER BY updated_at DESC
             """, (user_id,))
 
@@ -75,7 +75,7 @@ class NoteModel:
                 notes.append({
                     "id": row[0],
                     "title": row[1],
-                    "content": row[2].read() if row[2] else "",
+                    "content": row[2],
                     "created_at": row[3].strftime("%Y-%m-%d %H:%M:%S"),
                     "updated_at": row[4].strftime("%Y-%m-%d %H:%M:%S")
                 })
@@ -102,13 +102,13 @@ class NoteModel:
             cursor.execute("""
                 UPDATE notes
                 SET
-                    title = :1,
-                    content = :2,
+                    title = %s,
+                    content = %s,
                     updated_at = CURRENT_TIMESTAMP
                 WHERE
-                    id = :3
+                    id = %s
                 AND
-                    user_id = :4
+                    user_id = %s
             """, (
                 title,
                 content,
@@ -141,9 +141,9 @@ class NoteModel:
             cursor.execute("""
                 DELETE FROM notes
                 WHERE
-                    id = :1
+                    id = %s
                 AND
-                    user_id = :2
+                    user_id = %s
             """, (
                 note_id,
                 user_id
