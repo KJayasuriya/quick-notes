@@ -26,10 +26,9 @@ class Database:
         connection = Database.get_connection()
 
         if connection is None:
-            return None, None
+            raise Exception("Database connection failed")
 
         cursor = connection.cursor()
-
         return connection, cursor
 
     @staticmethod
