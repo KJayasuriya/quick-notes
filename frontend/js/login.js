@@ -1,4 +1,4 @@
-const API_URL = "https://quick-notes-api.onrender.com";
+const API_URL = "http://127.0.0.1:8000";
 // Theme Toggle
 const themeButton = document.querySelector("#theme-toggle");
 
@@ -94,12 +94,12 @@ if (signupBtn) {
 
         }
 
+        const result = await response.json();
+
         if (!response.ok) {
-            alert("Server error.");
+            alert(result.detail?.[0]?.msg || result.message || "Server error.");
             return;
         }
-
-        const result = await response.json();
 
         alert(result.message);
 
@@ -163,15 +163,16 @@ if (loginButton) {
 
         }
 
+        const result = await response.json();
+
         if (!response.ok) {
-            alert("Server error.");
+            alert(result.detail?.[0]?.msg || result.message || "Request failed.");
             return;
         }
 
-        const result = await response.json();
+        alert(result.message);
 
         if (!result.success) {
-            alert(result.message);
             return;
         }
 

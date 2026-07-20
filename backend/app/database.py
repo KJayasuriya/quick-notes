@@ -1,6 +1,6 @@
 import psycopg2
 from app.config import Config
-
+import traceback
 
 class Database:
 
@@ -16,10 +16,9 @@ class Database:
                 password=Config.DB_PASSWORD
             )
 
-        except Exception as e:
-            print(e)
+        except Exception:
+            traceback.print_exc()
             return None
-
     @staticmethod
     def get_cursor():
 
