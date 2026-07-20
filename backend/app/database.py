@@ -13,7 +13,8 @@ class Database:
                 port=Config.DB_PORT,
                 dbname=Config.DB_NAME,
                 user=Config.DB_USER,
-                password=Config.DB_PASSWORD
+                password=Config.DB_PASSWORD,
+                sslmode="require"
             )
 
         except Exception:
