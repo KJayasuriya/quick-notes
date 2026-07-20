@@ -6,10 +6,7 @@ class Database:
 
     @staticmethod
     def get_connection():
-        print("HOST =", Config.DB_HOST)
-        print("PORT =", Config.DB_PORT)
-        print("DB   =", Config.DB_NAME)
-        print("USER =", Config.DB_USER)
+
         try:
             return psycopg2.connect(
                 host=Config.DB_HOST,
@@ -20,12 +17,8 @@ class Database:
                 sslmode="require"
             )
 
-         except Exception as e:
-            print("=" * 60)
-            print("DATABASE CONNECTION FAILED")
-            print(e)
+        except Exception:
             traceback.print_exc()
-            print("=" * 60)
             return None
     @staticmethod
     def get_cursor():
