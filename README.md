@@ -1,4 +1,10 @@
 # 📝 NoteX
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.139-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Render](https://img.shields.io/badge/Backend-Render-black)
+![Netlify](https://img.shields.io/badge/Frontend-Netlify-00C7B7)
 
 A modern full-stack note-taking application built with **FastAPI**, **PostgreSQL**, and **Vanilla JavaScript**. Users can securely register, log in using JWT authentication, and manage their notes from anywhere.
 
@@ -8,6 +14,21 @@ A modern full-stack note-taking application built with **FastAPI**, **PostgreSQL
 
 ---
 
+## Table of Contents
+
+- Features
+- Architecture
+- Screenshots
+- Tech Stack
+- Project Structure
+- Live Deployment
+- Authentication
+- API
+- Installation
+- Database
+- Future Improvements
+- Author
+- License
 ## ✨ Features
 
 - 🔐 Secure User Registration
@@ -20,9 +41,18 @@ A modern full-stack note-taking application built with **FastAPI**, **PostgreSQL
 - 💾 Persistent Cloud Database (Neon PostgreSQL)
 - 📱 Responsive User Interface
 - 📚 Interactive Swagger API Documentation
-
+- 🔎 Search Notes
 ---
-
+## Architecture
+```
+Frontend (HTML/CSS/JS)
+        │
+        ▼
+FastAPI REST API
+        │
+        ▼
+PostgreSQL (Neon)
+```
 ## 🖼️ Screenshots
 
 ### 1. Home Page
@@ -207,12 +237,10 @@ Protected endpoints include:
 # 💻 Local Installation
 
 ## Clone Repository
-
-```bash
-git clone https://github.com/KJayasuriya/quick-notes.git
-cd quick-notes
 ```
-
+git clone https://github.com/KJayasuriya/notex.git
+cd notex
+```
 ---
 
 ## Backend Setup
@@ -293,9 +321,7 @@ inside PostgreSQL.
 
 **K. Jayasuriya**
 
-GitHub
-
-https://github.com/KJayasuriya
+GitHub : https://github.com/KJayasuriya
 
 ---
 
