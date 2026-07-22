@@ -76,7 +76,7 @@ A modern full-stack note-taking application built with **FastAPI**, **PostgreSQL
 ### 7. Swagger API
 
 <p align="center">
-  <img src="assets/swagger.png" width="900">
+  <img src="assets/swagger-ui.png" width="900">
 </p>
 
 # 🏗️ Tech Stack
