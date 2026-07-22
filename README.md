@@ -1,4 +1,4 @@
-# 📝 NotesNest
+# 📝 NoteX
 
 A modern full-stack note-taking application built with **FastAPI**, **PostgreSQL**, and **Vanilla JavaScript**. Users can securely register, log in using JWT authentication, and manage their notes from anywhere.
 
@@ -25,27 +25,59 @@ A modern full-stack note-taking application built with **FastAPI**, **PostgreSQL
 
 ## 🖼️ Screenshots
 
-> Add screenshots here after deployment.
+### 1. Home Page
 
-### Home Page
-
-```
-images/home.png
-```
-
-### Dashboard
-
-```
-images/dashboard.png
-```
-
-### Swagger API
-
-```
-images/swagger.png
-```
+<p align="center">
+  <img src="assets/home.png" width="900">
+</p>
 
 ---
+
+### 2. Dashboard
+
+<p align="center">
+  <img src="assets/dashboard.png" width="900">
+</p>
+
+---
+
+### 3. Taking Notes
+
+<p align="center">
+  <img src="assets/taking-notes.png" width="900">
+</p>
+
+---
+
+### 4. Search Notes
+
+<p align="center">
+  <img src="assets/searchnotes.png" width="900">
+</p>
+
+---
+
+### 5. Dark Mode
+
+<p align="center">
+  <img src="assets/darkmode.png" width="900">
+</p>
+
+---
+
+### 6. No Results
+
+<p align="center">
+  <img src="assets/no-results.png" width="900">
+</p>
+
+---
+
+### 7. Swagger API
+
+<p align="center">
+  <img src="assets/swagger.png" width="900">
+</p>
 
 # 🏗️ Tech Stack
 
@@ -78,27 +110,35 @@ images/swagger.png
 # 📂 Project Structure
 
 ```
-study-notes-app/
-│
-├── backend/
-│   ├── app/
-│   ├── requirements.txt
-│   ├── run.py
-│   └── runtime.txt
-│
-├── frontend/
-│   ├── css/
-│   ├── js/
-│   ├── assets/
-│   ├── index.html
-│   ├── register.html
-│   └── app.html
-│
-├── database/
-│   ├── schema.sql
-│   └── seed.sql
-│
-└── README.md
+notex
+|
+├── assets
+│   ├── darkmode.png
+│   ├── dashboard.png
+│   ├── home.png
+│   ├── no-results.png
+│   ├── searchnotes.png
+│   └── taking-notes.png
+├── backend
+│   ├── app
+│   ├── requirements.txt
+│   ├── run.py
+│   ├── runtime.txt
+│   └── test.py
+├── database
+│   ├── README.md
+│   ├── schema.sql
+│   └── seed.sql
+├── frontend
+│   ├── app.html
+│   ├── assets
+│   ├── css
+│   ├── index.html
+│   ├── js
+│   └── register.html
+├── README.md
+└── tests
+
 ```
 
 ---
@@ -191,16 +231,16 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
-Create `.env`
+Create a `.env` file:
 
 ```env
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=notex
-DB_USER=postgres
-DB_PASSWORD=your_password
+DB_HOST=<database_host>
+DB_PORT=<database_port>
+DB_NAME=<database_name>
+DB_USER=<database_user>
+DB_PASSWORD=<database_password>
 
-JWT_SECRET_KEY=your_secret_key
+JWT_SECRET_KEY=<your_jwt_secret>
 JWT_ALGORITHM=HS256
 JWT_EXPIRE_MINUTES=60
 ```
